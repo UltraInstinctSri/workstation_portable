@@ -1,0 +1,49 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+
+\title{Every Vertex-Transitive Graph is Regular, but the Converse is Not True}
+\author{Srijan Majumder \\ Scholar Id : 26CS22R04 }
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{\underline{Proof}}
+
+A graph is \emph{regular} if every vertex has the same number of neighbours. A graph is \emph{vertex-transitive} if, for any two vertices $u$ and $v$, some symmetry of the graph (an automorphism) can slide $u$ exactly onto $v$, keeping every edge intact.
+
+\subsection*{Vertex-transitive implies regular}
+
+Suppose $G$ is vertex-transitive, and take any two vertices $u$ and $v$. There is an automorphism $f$ with $f(u) = v$. Since $f$ preserves edges, it matches each neighbour of $u$ to a neighbour of $v$, one-to-one, with none left over. So $u$ and $v$ have the same number of neighbours. As $u$ and $v$ were arbitrary, every vertex has the same degree -- $G$ is regular.
+
+\subsection*{Regular does not imply vertex-transitive}
+
+Regular only checks one number: the degree. Vertex-transitive checks that the whole neighbourhood looks the same everywhere, which is a stronger requirement. So a graph can match on degree alone without being truly symmetric.
+
+\section*{\underline{Example}}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1, vtx/.style={circle,draw,fill=white,inner sep=1.5pt,minimum size=4pt}]
+\node[vtx] (A1) at (0,1.6) {};
+\node[vtx] (A2) at (-1.4,-0.7) {};
+\node[vtx] (A3) at (1.4,-0.7) {};
+\draw (A1) -- (A2) -- (A3) -- (A1);
+\begin{scope}[xshift=6cm]
+\foreach \i in {0,...,5} {
+  \node[vtx] (B\i) at (90+60*\i:1.6) {};
+}
+\draw (B0) -- (B1) -- (B2) -- (B3) -- (B4) -- (B5) -- (B0);
+\end{scope}
+\end{tikzpicture}
+\caption{A triangle and a hexagon, with no edges between them.}
+\end{figure}
+
+Take a triangle and a hexagon, drawn side by side with no edges connecting them.
+Every vertex, in the triangle or the hexagon, has exactly 2 neighbours -- so the graph is regular.
+But no symmetry can send a triangle vertex to a hexagon vertex: a symmetry must send a 3-cycle to a 3-cycle, and a hexagon vertex sits on a 6-cycle, not a 3-cycle. So the graph is not vertex-transitive.
+This one picture is enough: regular, but not vertex-transitive.
+
+\end{document}
